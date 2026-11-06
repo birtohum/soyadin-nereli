@@ -1,5 +1,6 @@
 "use strict";
 const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 const sayi = (x) => x.toLocaleString("tr-TR");
 const guzel = (s) => s.toLocaleLowerCase("tr").split(" ").map((w) => w.charAt(0).toLocaleUpperCase("tr") + w.slice(1)).join(" ");
 const buyuk = (s) => s.trim().replace(/\s+/g, " ").toLocaleUpperCase("tr");
@@ -69,7 +70,7 @@ function sorgula(soyYaz) {
   $("geri").hidden = false;
   $("yazi").innerHTML = "";
   if (!k) {
-    $("ozet").innerHTML = `<p class="cumle"><b>${guzel(S)}</b> hiçbir ilin en çok kullanılan 30 soyadı arasında değil. TÜİK yalnız ilk 30'u yayımladığı için daha seyrek soyadlarını gösteremiyoruz.</p>`;
+    $("ozet").innerHTML = `<p class="cumle"><b>${esc(guzel(S))}</b> hiçbir ilin en çok kullanılan 30 soyadı arasında değil. TÜİK yalnız ilk 30'u yayımladığı için daha seyrek soyadlarını gösteremiyoruz.</p>`;
     [...$("harita").querySelectorAll("path")].forEach((e) => { e.style.fill = ""; });
     return;
   }
