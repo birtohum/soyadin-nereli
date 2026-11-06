@@ -43,7 +43,7 @@ function ozelHarita() {
     e.onclick = () => o && sorgula(o[0]);
   });
   H.iller.forEach((p, i) => { const o = V.ozel[i]; if (o) yazi(p.x, p.y + 3, guzel(o[0]), "ozel"); });
-  $("ozet").innerHTML = `<p class="cumle">Her ilde en çok kullanılan soyadı neredeyse her yerde <b>Yılmaz</b>. Ama her ilin ilk 30'unda, başka illerde pek görülmeyen bir soyadı var. Haritadaki adlar onlar. Birine dokun ya da kendi soyadını yaz.</p>`;
+  $("ozet").innerHTML = `<p class="cumle">81 ilin 57'sinde en çok kullanılan soyadı <b>Yılmaz</b>. Ama her ilin ilk 30'unda, başka illerde pek görülmeyen bir soyadı var. Haritadaki adlar onlar. Birine dokun ya da kendi soyadını yaz.</p>`;
   $("lejant").textContent = "Her ilin üzerinde: o ilin ilk 30'unda olup en az başka ilde görünen soyadı.";
   history.replaceState(null, "", location.pathname);
 }
