@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soyadın nereli?</title>
+<meta name="description" content="TÜİK verisiyle her ilde en çok kullanılan 30 soyadı: soyadını yaz, hangi illerde yaygın olduğunu gör. Her ilin kendine özgü soyadı haritası.">
+<meta property="og:title" content="Soyadın nereli?">
+<meta property="og:description" content="81 ilin en çok kullanılan soyadları ve her ilin kendine özgü soyadı. TÜİK 2025.">
+<meta property="og:image" content="https://birtohum.github.io/soyadin-nereli/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stil.css?v=1">
+<style>
+  :root { --vurgu: #1d4ed8; --giden: #1d4ed8; }
+  @media (prefers-color-scheme: dark) { :root { --vurgu: #93c5fd; --giden: #60a5fa; } }
+  .form { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+  .form label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: var(--soluk); font-weight: 500; flex: 0 1 320px; }
+  .form input { font: inherit; font-size: 18px; height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--cizgi); background: var(--kart); color: var(--yazi); }
+  .form button { font: inherit; font-weight: 600; height: 48px; padding: 0 22px; border-radius: 10px; border: 0; background: var(--yazi); color: var(--zemin); cursor: pointer; }
+  .form button.ikincil { background: transparent; color: var(--yazi); border: 1px solid var(--cizgi); }
+  #harita .ozel { font-size: 9.5px; font-weight: 700; fill: var(--yazi); paint-order: stroke; stroke: var(--il); stroke-width: 2.5px; pointer-events: none; }
+  #harita .sira { font-size: 10px; font-weight: 700; fill: #fff; pointer-events: none; }
+  .ozet .cumle { margin-top: 0; }
+  @media (max-width: 720px) { #harita .ozel { font-size: 13px; } .form label { flex: 1 1 100%; } .form button { flex: 1; } }
+</style>
+</head>
+<body>
+<main>
+  <header class="ust">
+    <p class="ust-etiket">TÜİK · 2025 · 81 il</p>
+    <h1>Soyadın<br>nereli?</h1>
+    <form id="form" class="form" autocomplete="off">
+      <label><span>Soyadını yaz</span><input id="soy" list="soylar" placeholder="örneğin Yılmaz, Kaya, Demir" required></label>
+      <button type="submit">Göster</button>
+      <button type="button" class="ikincil" id="geri" hidden>Her ilin kendi soyadı</button>
+      <datalist id="soylar"></datalist>
+    </form>
+  </header>
+
+  <section class="ozet" id="ozet" aria-live="polite"></section>
+
+  <section class="harita-kutu">
+    <svg id="harita" role="img" aria-label="Türkiye il haritası"></svg>
+    <div class="lejant" id="lejant"></div>
+  </section>
+
+  <section class="iki">
+    <div>
+      <h2>En yerel soyadları</h2>
+      <p class="alt">Yalnız bir ilin ilk 30'unda görünen, o ilde en çok taşınan soyadları.</p>
+      <ol class="liste" id="yerel"></ol>
+    </div>
+    <div>
+      <h2>Türkiye'nin en yaygın 10 soyadı</h2>
+      <p class="alt">Kaç ilin ilk 30'unda görünüyor.</p>
+      <ol class="liste" id="yaygin"></ol>
+    </div>
+  </section>
+
+  <footer class="dip">
+    <p><b>Veri:</b> TÜİK, Adrese Dayalı Nüfus Kayıt Sistemi, en çok kullanılan soyadları, 2025 (<a href="https://nip.tuik.gov.tr/?value=EnCokKullanilanSoyIsimler">Nüfus İstatistikleri Portalı</a>). İl, kişinin bugün kayıtlı yaşadığı il; soyadının köken aldığı yer değil.</p>
+    <p><b>Sınırlar:</b> TÜİK her il için yalnız en çok kullanılan 30 soyadını yayımlıyor. Bir soyadının bir ilde görünmemesi orada hiç olmadığı anlamına gelmez, yalnız ilk 30'da olmadığı anlamına gelir. "Kendine özgü soyadı", o ilin ilk 30'unda olup en az sayıda başka ilin ilk 30'unda görünen soyadıdır; eşitlikte o ilde daha çok kişinin taşıdığı seçildi.</p>
+    <p><b>Harita:</b> il sınırları <a href="https://www.geoboundaries.org/">geoBoundaries</a> (CC BY-SA 2.0, OpenStreetMap kaynaklı), sadeleştirildi.</p>
+    <p><a href="https://github.com/birtohum/soyadin-nereli">Kaynak kodu</a> · <a href="https://birtohum.github.io/">birtohum</a></p>
+  </footer>
+</main>
+<script src="uygulama.js?v=1"></script>
+</body>
+</html>
