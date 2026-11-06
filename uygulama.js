@@ -33,6 +33,21 @@ function yazi(x, y, t, sinif, renk) {
   e.textContent = t; $("yazi").appendChild(e);
 }
 
+// Yakın illerin adları üst üste binmesin: çakışan yazıyı en yakın boş yüksekliğe kaydırır
+function carpisma() {
+  const dolu = [];
+  [...$("yazi").children].forEach((e) => {
+    const b = e.getBBox(), y0 = Number(e.getAttribute("y")), h = b.height;
+    for (const k of [0, -1, 1, -2, 2, -3, 3]) {
+      const dy = k * h * 0.95, r = {x: b.x - 1, y: b.y + dy, w: b.width + 2, h};
+      if (!dolu.some((o) => r.x < o.x + o.w && o.x < r.x + r.w && r.y < o.y + o.h && o.y < r.y + r.h)) {
+        e.setAttribute("y", y0 + dy); dolu.push(r); return;
+      }
+    }
+    dolu.push({x: b.x, y: b.y, w: b.width, h});
+  });
+}
+
 function ozelHarita() {
   $("yazi").innerHTML = "";
   $("geri").hidden = true;
@@ -43,6 +58,7 @@ function ozelHarita() {
     e.onclick = () => o && sorgula(o[0]);
   });
   H.iller.forEach((p, i) => { const o = V.ozel[i]; if (o) yazi(p.x, p.y + 3, guzel(o[0]), "ozel"); });
+  carpisma();
   $("ozet").innerHTML = `<p class="cumle">81 ilin 57'sinde en çok kullanılan soyadı <b>Yılmaz</b>. Ama her ilin ilk 30'unda, başka illerde pek görülmeyen bir soyadı var. Haritadaki adlar onlar. Birine dokun ya da kendi soyadını yaz.</p>`;
   $("lejant").textContent = "Her ilin üzerinde: o ilin ilk 30'unda olup en az başka ilde görünen soyadı.";
   history.replaceState(null, "", location.pathname);
